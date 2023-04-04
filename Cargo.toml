@@ -4,6 +4,7 @@ description = "Structures to keep clients up to date with a server, with the cli
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
+readme = "README.md"
 authors = ["Kristoffer Ödmark <kristoffer.odmark90@gmail.com>"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
