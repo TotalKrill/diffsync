@@ -10,8 +10,8 @@ and the server then supplies the clients with a diff to get a completely synchro
 use std::collections::BTreeMap;
 
 use diff::Diff;
+use diffsync::*;
 use serde::{Deserialize, Serialize};
-use synctest::*;
 
 #[derive(Deserialize, Serialize, Diff, Debug, Clone, Hash, PartialEq, Default)]
 #[diff(attr(#[derive(Serialize, Deserialize)]))]
@@ -20,7 +20,9 @@ pub struct Data {
 }
 
 fn main() {
-    // clients request updates from the server, after each request, the state should be equal, and hopefulle it does not mean a full state update
+    // clients request updates from the server, after each request,
+    // the state should be equal, and it should not be a full update
+    // for subsequent requests
     let mut client1 = Client::<Data, u32>::with_id(1337);
     let mut server: Server<Data, u32> = Server::default();
 
