@@ -1,7 +1,7 @@
 [package]
 name = "diffsync"
 description = "Structures to keep clients up to date with a server, with the client initiating the synchronization, and the server keeping track of different clients last known state"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license = "MIT"
 readme = "README.md"

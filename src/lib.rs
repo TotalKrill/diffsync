@@ -1,4 +1,4 @@
-use diff::Diff;
+pub use diff::*;
 use serde::{Deserialize, Serialize};
 use std::{
     collections::{hash_map::DefaultHasher, BTreeMap},
