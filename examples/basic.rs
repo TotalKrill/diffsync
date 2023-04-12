@@ -1,7 +1,7 @@
 use std::collections::BTreeMap;
 
 use diff::Diff;
-use diffsync::*;
+use diffsync::{self, client::*, server::*};
 use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize, Diff, Debug, Clone, Hash, PartialEq, Default)]
