@@ -107,7 +107,7 @@ mod test {
         let mut rng = ThreadRng::default();
 
         // clients request updates from the server, after each request, the state should be equal, and hopefulle it does not mean a full state update
-        let mut client = client::Client::with_id(1337);
+        let mut client: client::Client<Data, u32> = client::Client::with_id(1337);
         // the servers state updates frequently, each time the client requests
         let mut server: server::Server<Data, u32> = server::Server::default();
         for i in 0..100 {

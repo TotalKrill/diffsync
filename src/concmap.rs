@@ -1,4 +1,5 @@
 use super::*;
+use crate::structs::SimpleDiffTrait;
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct ConcMap<K: Eq + Ord + Hash, V: PartialEq>(pub DashMap<K, V>);

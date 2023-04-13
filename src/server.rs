@@ -1,4 +1,5 @@
 use dashmap::DashMap;
+use twox_hash::XxHash64;
 
 use super::*;
 
@@ -41,7 +42,7 @@ impl<STATE: Diff, ID: Hash + Ord> Server<STATE, ID> {
 
 impl<STATE: Hash + Clone + Diff, ID: Hash + Ord> Server<STATE, ID> {
     fn calculate_hash(&self) -> u64 {
-        let mut h = DefaultHasher::new();
+        let mut h = XxHash64::with_seed(1337);
         self.state.hash(&mut h);
         h.finish()
     }

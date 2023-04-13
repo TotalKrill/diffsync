@@ -1,6 +1,8 @@
+use twox_hash::XxHash64;
+
 use super::*;
 
-#[derive()]
+#[cfg_attr(feature = "bevy_support", derive(bevy::prelude::Resource))]
 pub struct Client<STATE: Default, ID> {
     id: ID,
     pub state: STATE,
@@ -19,7 +21,7 @@ impl<STATE: Hash + Diff + Default, ID: Clone> Client<STATE, ID> {
     }
 
     fn calculate_hash(&self) -> u64 {
-        let mut h = DefaultHasher::new();
+        let mut h = XxHash64::with_seed(1337);
         self.state.hash(&mut h);
         h.finish()
     }
@@ -42,7 +44,12 @@ impl<STATE: Hash + Diff + Default, ID: Clone> Client<STATE, ID> {
                 newhash,
             } => {
                 self.state = STATE::identity();
+                let before_apply = self.calculate_hash();
+                log::info!("before apply: {before_apply:X}");
                 self.state.apply(&complete_diff);
+                let myhash = self.calculate_hash();
+                log::info!("calucalted hash: {myhash:X}");
+                log::info!("expected hash: {newhash:X}");
                 // state
                 if newhash == self.calculate_hash() {
                     return Ok(());
