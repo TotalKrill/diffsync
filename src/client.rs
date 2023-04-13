@@ -1,5 +1,7 @@
 use twox_hash::XxHash64;
 
+use crate::customhash::CustomHash;
+
 use super::*;
 
 #[cfg_attr(feature = "bevy_support", derive(bevy::prelude::Resource))]
@@ -21,7 +23,7 @@ impl<STATE: Hash + Diff + Default, ID: Clone> Client<STATE, ID> {
     }
 
     fn calculate_hash(&self) -> u64 {
-        let mut h = XxHash64::with_seed(1337);
+        let mut h = CustomHash::new();
         self.state.hash(&mut h);
         h.finish()
     }

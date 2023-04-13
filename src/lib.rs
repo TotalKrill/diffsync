@@ -1,8 +1,10 @@
+#![feature(hasher_prefixfree_extras)]
+
 use dashmap::DashMap;
 pub use diff::*;
 use serde::{Deserialize, Serialize};
 use std::{
-    collections::{hash_map::DefaultHasher, BTreeMap},
+    collections::BTreeMap,
     hash::{Hash, Hasher},
 };
 
@@ -10,6 +12,7 @@ pub use structs::SimpleDiff;
 
 // implementation
 pub mod client;
+pub mod customhash;
 pub mod server;
 pub mod structs;
 
