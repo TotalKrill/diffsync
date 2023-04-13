@@ -1,7 +1,13 @@
 use super::*;
 
-#[derive(Default, Deserialize, Serialize, Debug, Clone)]
+#[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct ConcMap<K: Eq + Ord + Hash, V: PartialEq>(pub DashMap<K, V>);
+
+impl<K: Eq + Ord + Hash, V: PartialEq> Default for ConcMap<K, V> {
+    fn default() -> Self {
+        Self(DashMap::default())
+    }
+}
 
 impl<K: Clone + Ord + Hash, V: PartialEq + Clone> ConcMap<K, V> {
     fn as_btree(&self) -> BTreeMap<K, V> {
